@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e2e;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: #2a2a3a;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        input, textarea {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        button {
+            background: #5865F2;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Register Your Shop</h2>
+        <form id="shopForm">
+            <input type="text" id="shopName" placeholder="Shop Name" required>
+            <input type="text" id="ownerName" placeholder="Owner Name" required>
+            <textarea id="shopDescription" placeholder="Describe Your Shop" required></textarea>
+            <button type="button" onclick="submitApplication()">Apply!</button>
+        </form>
+        <p id="responseMessage" style="display: none;">You Finished The Application! We will reach out to you when we got your application results.</p>
+    </div>
+
+    <script>
+        function submitApplication() {
+            const shopName = document.getElementById('shopName').value;
+            const ownerName = document.getElementById('ownerName').value;
+            const shopDescription = document.getElementById('shopDescription').value;
+            const webhookURL = "https://discord.com/api/webhooks/1347455161009967165/BE8i3xsziSZnpeiUxqd_26zVSbuVDCO9yrEQ2y5JBfNUGYpJt7zx_rhFi5Z0DoYc7hHH";
+
+            const payload = {
+                content: `New Shop Registration!\n**Shop Name:** ${shopName}\n**Owner Name:** ${ownerName}\n**Description:** ${shopDescription}`
+            };
+
+            fetch(webhookURL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            }).then(() => {
+                document.getElementById('shopForm').reset();
+                document.getElementById('responseMessage').style.display = 'block';
+            }).catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
