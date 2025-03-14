@@ -43,6 +43,10 @@
             <input type="text" id="shopName" placeholder="Shop Name" required>
             <input type="text" id="ownerName" placeholder="Owner Name" required>
             <textarea id="shopDescription" placeholder="Describe Your Shop" required></textarea>
+            <input type="text" id="discordTag" placeholder="Your Discord Tag (e.g., User#1234)" required>
+            <input type="text" id="shopCategory" placeholder="Shop Category (e.g., Clothing, Services, etc.)" required>
+            <textarea id="paymentMethods" placeholder="Accepted Payment Methods (e.g., PayPal, Crypto, etc.)" required></textarea>
+            <textarea id="shopRules" placeholder="List Any Shop Rules or Policies" required></textarea>
             <button type="button" onclick="submitApplication()">Apply!</button>
         </form>
         <p id="responseMessage" style="display: none;">You Finished The Application! We will reach out to you when we got your application results.</p>
@@ -53,10 +57,14 @@
             const shopName = document.getElementById('shopName').value;
             const ownerName = document.getElementById('ownerName').value;
             const shopDescription = document.getElementById('shopDescription').value;
+            const discordTag = document.getElementById('discordTag').value;
+            const shopCategory = document.getElementById('shopCategory').value;
+            const paymentMethods = document.getElementById('paymentMethods').value;
+            const shopRules = document.getElementById('shopRules').value;
             const webhookURL = "https://discord.com/api/webhooks/1347455161009967165/BE8i3xsziSZnpeiUxqd_26zVSbuVDCO9yrEQ2y5JBfNUGYpJt7zx_rhFi5Z0DoYc7hHH";
 
             const payload = {
-                content: `New Shop Registration!\n**Shop Name:** ${shopName}\n**Owner Name:** ${ownerName}\n**Description:** ${shopDescription}`
+                content: `New Shop Registration!\n**Shop Name:** ${shopName}\n**Owner Name:** ${ownerName}\n**Description:** ${shopDescription}\n**Discord Tag:** ${discordTag}\n**Category:** ${shopCategory}\n**Payment Methods:** ${paymentMethods}\n**Shop Rules:** ${shopRules}`
             };
 
             fetch(webhookURL, {
